@@ -33,7 +33,7 @@ var keyboard = new KeyboardState();
 timestepsize = 0.6 * 0.6;
 damping = 0.01;
 constraintIterations = 15;
-windStrength = new THREE.Vector3(0,0,7);
+windStrength = new THREE.Vector3(0,0,1);
 
 // Particle 
 function particle(vector) {
@@ -72,8 +72,8 @@ function calcTriangleNormal(p1, p2, p3) {
 
 // Cloth 
 function cloth() {
-	this.w = 30;
-	this.h = 30;
+	this.w = 50;
+	this.h = 50;
 	this.particles = [];
 	this.particles.length = this.w*this.h;
 	this.constraints = [];
@@ -282,6 +282,7 @@ function render() {
 	for(var i=0; i<Cloth.particles.length; i++) {
 		geom.vertices[i] = Cloth.particles[i].position;
 	}
+	geom.computeFaceNormals();
 	geom.verticesNeedUpdate = true;
 	geom.normalsNeedUpdate = true;
 	renderer.render( scene, camera );
